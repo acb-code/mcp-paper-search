@@ -1,0 +1,9 @@
+services:
+  paper-archive-mcp:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - PAPER_ROOT=/data
+    volumes:
+      - ./papers:/data:ro
