@@ -22,7 +22,7 @@ It is set up to search a local paper archive (the `papers/` folder) and return c
 - Docker + Docker Compose
 - An ngrok account (free tier is fine)
 
-Install and configure ngrok (WSL/Linux example):
+Install and configure ngrok (WSL/Linux example, get the token from ngrok.com):
 
 ```bash
 sudo snap install ngrok
@@ -60,7 +60,7 @@ Your MCP URL for ChatGPT will be:
 1. Open ChatGPT in your browser.
 2. Go to `Settings` -> `Apps` -> `Advanced settings`.
 3. Turn on `Developer mode`.
-4. Add an app using your ngrok URL with `/mcp` appended.
+4. Add an app using your ngrok URL with the `/mcp` appended.
 5. For this simple local test setup, select `No auth`.
 
 ## Notes
