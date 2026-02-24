@@ -6,6 +6,8 @@ from typing import List, Dict, Any
 from mcp.server.fastmcp import FastMCP
 from pypdf import PdfReader
 
+from mcp.server.transport_security import TransportSecuritySettings
+
 PAPER_ROOT = Path(os.environ.get("PAPER_ROOT", "/data")).resolve()
 
 
@@ -55,6 +57,9 @@ mcp = FastMCP(
     ),
     stateless_http=True,
     json_response=True,
+    transport_security=TransportSecuritySettings(
+        enable_dns_rebinding_protection=False,  # DEV: allow ngrok/forwarded hosts
+    ),
 )
 
 
@@ -116,8 +121,11 @@ def fetch_paper(path: str, max_chars: int = 60_000) -> Dict[str, Any]:
 
 
 def main() -> None:
+    # mcp>=1.26 configures host/port via settings, not run() kwargs.
+    mcp.settings.host = "0.0.0.0"
+    mcp.settings.port = 8000
     # Streamable HTTP transport; FastMCP mounts on /mcp by default.
-    mcp.run(transport="streamable-http", host="0.0.0.0", port=8000)
+    mcp.run(transport="streamable-http")
 
 
 if __name__ == "__main__":
